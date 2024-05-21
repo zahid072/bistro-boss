@@ -1,0 +1,8 @@
+.carousel {
+  height: 700px;
+}
+
+.carousel .thumbs {
+  display: flex;
+  justify-content: center;
+}
