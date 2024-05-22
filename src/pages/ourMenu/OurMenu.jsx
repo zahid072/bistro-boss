@@ -19,7 +19,7 @@ const OurMenu = () => {
         <h1 className="text-4xl font-bold text-center text-white">Our Menu</h1>
       </div>
       <div>
-        <PopularMenu menuCategory={"popular"} menuTitle={"Today Offer"} />
+        <PopularMenu menuCategory={"offered"} menuTitle={"Today Offer"} />
         <div className="w-full flex justify-center mt-6">
           <button className="btn btn-outline border-0 border-b-4 mx-auto">
             Order Your favorite food
