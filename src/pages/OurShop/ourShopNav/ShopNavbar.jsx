@@ -1,12 +1,14 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import MenuSection from "../menuSection/MenuSection";
 
 const ShopNavbar = () => {
+  const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
   return (
     <div>
       <Tabs>
-        <TabList >
+        <TabList>
           <Tab>Salad</Tab>
           <Tab>Pizza</Tab>
           <Tab>Soup</Tab>
@@ -14,12 +16,11 @@ const ShopNavbar = () => {
           <Tab>Drinks</Tab>
         </TabList>
 
-        <TabPanel>
-          <h2>Any content 1</h2>
-        </TabPanel>
-        <TabPanel>
-          <h2>Any content 2</h2>
-        </TabPanel>
+        {categories.map((category, index) => (
+          <TabPanel key={index}>
+            <MenuSection menuCategory={category}/>
+          </TabPanel>
+        ))}
       </Tabs>
     </div>
   );

@@ -1,2 +1,5 @@
 
   
+#parent:hover #child{
+    transform: scale(1.8);
+}
