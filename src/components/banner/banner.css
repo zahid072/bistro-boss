@@ -1,8 +1,11 @@
-.carousel {
+.carousel-slider {
   height: 700px;
 }
 
 .carousel .thumbs {
   display: flex;
   justify-content: center;
+}
+jahid{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.224), rgba(0, 0, 0, 0.174));
 }
