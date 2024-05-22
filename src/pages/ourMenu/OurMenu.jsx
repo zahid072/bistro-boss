@@ -6,6 +6,7 @@ import soup from "../../assets/menu/soup-bg.jpg";
 import salad from "../../assets/menu/salad-bg.jpg";
 import PopularMenu from "../popularMenu/PopularMenu";
 import MenuBanner from "./menuBanner/MenuBanner";
+import { Link } from "react-router-dom";
 
 const OurMenu = () => {
   return (
@@ -26,43 +27,51 @@ const OurMenu = () => {
           </button>
         </div>
         {/* menu section */}
-        <div className="mt-6">
+        <div className="mt-10 py-2 border-y-2 border-yellow-400">
           <MenuBanner menuImg={dessert} menuTitle={"Dessert"} />
           <PopularMenu menuCategory={"popular"} />
           <div className="w-full flex justify-center mt-6">
-            <button className="btn btn-outline border-0 border-b-4 mx-auto">
-              Order Your favorite food
-            </button>
+          <Link to={`/ourShop?menu=3`}>
+              <button className="btn btn-outline border-0 border-b-4 mx-auto">
+                Order Your favorite food
+              </button>
+            </Link>
           </div>
         </div>
         {/* menu section */}
-        <div className="mt-6">
+        <div className="mt-10 py-2 border-y-2 border-yellow-400">
           <MenuBanner menuImg={pizza} menuTitle={"Pizza"} />
           <PopularMenu menuCategory={"pizza"} />
           <div className="w-full flex justify-center mt-6">
-            <button className="btn btn-outline border-0 border-b-4 mx-auto">
-              Order Your favorite food
-            </button>
+          <Link to={`/ourShop?menu=1`}>
+              <button className="btn btn-outline border-0 border-b-4 mx-auto">
+                Order Your favorite food
+              </button>
+            </Link>
           </div>
         </div>
         {/* menu section */}
-        <div className="mt-6">
+        <div className="mt-10 py-2 border-y-2 border-yellow-400">
           <MenuBanner menuImg={soup} menuTitle={"Soup"} />
           <PopularMenu menuCategory={"soup"} />
           <div className="w-full flex justify-center mt-6">
-            <button className="btn btn-outline border-0 border-b-4 mx-auto">
-              Order Your favorite food
-            </button>
+          <Link to={`/ourShop?menu=2`}>
+              <button className="btn btn-outline border-0 border-b-4 mx-auto">
+                Order Your favorite food
+              </button>
+            </Link>
           </div>
         </div>
         {/* menu section */}
-        <div className="mt-6">
+        <div className="mt-10 py-2 border-y-2 border-yellow-400">
           <MenuBanner menuImg={salad} menuTitle={"Salad"} />
           <PopularMenu menuCategory={"salad"} />
           <div className="w-full flex justify-center mt-6">
-            <button className="btn btn-outline border-0 border-b-4 mx-auto">
-              Order Your favorite food
-            </button>
+            <Link to={`/ourShop?menu=0`}>
+              <button className="btn btn-outline border-0 border-b-4 mx-auto">
+                Order Your favorite food
+              </button>
+            </Link>
           </div>
         </div>
       </div>

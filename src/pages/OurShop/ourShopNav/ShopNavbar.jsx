@@ -3,11 +3,11 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import MenuSection from "../menuSection/MenuSection";
 
-const ShopNavbar = () => {
+const ShopNavbar = ({menuIndex}) => {
   const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
   return (
     <div>
-      <Tabs>
+      <Tabs selectedIndex={menuIndex}>
         <TabList>
           <Tab>Salad</Tab>
           <Tab>Pizza</Tab>
