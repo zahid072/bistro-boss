@@ -19,7 +19,7 @@ const MenuSection = ({ menuCategory }) => {
       <div className="grid md:grid-cols-3 gap-5">
         {categoryMenu.map((menu, index) => (
           <div key={index} className="w-full h-[300px] relative border rounded">
-            <Link>
+            <Link to={`/menuDetails/${menu?._id}`}>
               <div
                 className=" size-full cursor-pointer rounded bg-cover bg-no-repeat bg-center flex items-center justify-center"
                 style={{
