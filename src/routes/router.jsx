@@ -5,9 +5,13 @@ import OurMenu from "../pages/ourMenu/OurMenu";
 import OurShop from "../pages/OurShop/OurShop";
 import MenuDetails from "../pages/menuDetails/MenuDetails";
 import DashboardHome from "../dashboard/dashboardHome/DashboardHome";
-import UserHome from "../dashboard/dashboardPages/userHome/UserHome";
-import AdminHome from "../dashboard/dashboardPages/adminHome/AdminHome";
-import Reservation from "../dashboard/dashboardPages/reservation/Reservation";
+import UserHome from "../dashboard/user/userHome/UserHome";
+import AdminHome from "../dashboard/Admin/adminHome/AdminHome";
+import Reservation from "../dashboard/user/reservation/Reservation";
+import MyBooking from "../dashboard/user/myBooking/MyBooking";
+import AddItem from "../dashboard/Admin/addItem/AddItem";
+import PaymentHistory from "../dashboard/user/paymentHistory/PaymentHistory";
+import MyCart from "../dashboard/user/myCart/MyCart";
 
 const router = createBrowserRouter([
   {
@@ -37,24 +41,52 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:"/dashboard",
-    element:<DashboardHome/>,
-    children:[
-      // user routes
+    path: "/dashboard",
+    element: <DashboardHome />,
+    children: [
+      // ----------------------------------user routes----------------------------------
       {
-        path:"/dashboard/userHome",
-        element:<UserHome/>
+        path: "/dashboard/userHome",
+        element: <UserHome />,
       },
       {
-        path:"/dashboard/reservation",
-        element:<Reservation/>
+        path: "/dashboard/paymentHistory",
+        element: <PaymentHistory />,
       },
-      // admin routes
       {
-        path:"/dashboard/adminHome",
-        element:<AdminHome/>
+        path: "/dashboard/myCart",
+        element: <MyCart />,
       },
-    ]
-  }
+      {
+        path: "/dashboard/myBooking",
+        element: <MyBooking />,
+      },
+      {
+        path: "/dashboard/reservation",
+        element: <Reservation />,
+      },
+      // -------------------------------admin routes-------------------------------
+      {
+        path: "/dashboard/adminHome",
+        element: <AdminHome />,
+      },
+      {
+        path: "/dashboard/addItem",
+        element: <AddItem />,
+      },
+      {
+        path: "/dashboard/manageItem",
+        element: <AddItem />,
+      },
+      {
+        path: "/dashboard/manageBooking",
+        element: <AddItem />,
+      },
+      {
+        path: "/dashboard/allUser",
+        element: <AddItem />,
+      },
+    ],
+  },
 ]);
 export default router;

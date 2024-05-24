@@ -21,7 +21,7 @@ const DashboardHome = () => {
         <div className="md:w-1/5 h-screen md:bg-amber-500 p-5">
           <Sidebar />
         </div>
-        <div className="md:w-4/5 p-5">
+        <div className="md:w-4/5 p-5 bg-slate-100">
           <Outlet />
         </div>
       </div>

@@ -52,6 +52,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
+              to={"/dashboard/paymentHistory"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white flex items-center gap-1"
@@ -63,6 +64,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
+              to={"/dashboard/myCart"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white flex items-center gap-1"
@@ -74,6 +76,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
+              to={"/dashboard/myBooking"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white flex items-center gap-1"
@@ -102,7 +105,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to={"/dashboard/adminHome"}
+                to={"/dashboard/addItem"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white flex items-center gap-1"
@@ -114,7 +117,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to={"/dashboard/adminHome"}
+                to={"/dashboard/manageItem"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white flex items-center gap-1"
@@ -126,7 +129,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to={"/dashboard/adminHome"}
+                to={"/dashboard/manageBooking"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white flex items-center gap-1"
@@ -138,7 +141,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to={"/dashboard/adminHome"}
+                to={"/dashboard/allUser"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white flex items-center gap-1"

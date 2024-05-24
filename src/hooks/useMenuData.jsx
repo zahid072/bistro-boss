@@ -1,13 +1,14 @@
 import  { useEffect, useState } from "react";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useMenuData = () => {
   const [menuData, setMenuData] = useState([]);
+  const axiosSecure = useAxiosSecure()
 
   useEffect(() => {
-    fetch("/menu.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setMenuData(data);
+    axiosSecure.get("/allMenu")
+      .then((res) => {
+        setMenuData(res.data);
       });
   }, []);
   return menuData
