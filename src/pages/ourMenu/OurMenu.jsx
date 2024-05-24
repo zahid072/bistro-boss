@@ -31,7 +31,7 @@ const OurMenu = () => {
           <MenuBanner menuImg={dessert} menuTitle={"Dessert"} />
           <PopularMenu menuCategory={"popular"} />
           <div className="w-full flex justify-center mt-6">
-          <Link to={`/ourShop?menu=3`}>
+          <Link to={`/ourShop/${3}`}>
               <button className="btn btn-outline border-0 border-b-4 mx-auto">
                 Order Your favorite food
               </button>
@@ -43,7 +43,7 @@ const OurMenu = () => {
           <MenuBanner menuImg={pizza} menuTitle={"Pizza"} />
           <PopularMenu menuCategory={"pizza"} />
           <div className="w-full flex justify-center mt-6">
-          <Link to={`/ourShop?menu=1`}>
+          <Link to={`/ourShop/${1}`}>
               <button className="btn btn-outline border-0 border-b-4 mx-auto">
                 Order Your favorite food
               </button>
@@ -55,7 +55,7 @@ const OurMenu = () => {
           <MenuBanner menuImg={soup} menuTitle={"Soup"} />
           <PopularMenu menuCategory={"soup"} />
           <div className="w-full flex justify-center mt-6">
-          <Link to={`/ourShop?menu=2`}>
+          <Link to={`/ourShop/${2}`}>
               <button className="btn btn-outline border-0 border-b-4 mx-auto">
                 Order Your favorite food
               </button>
@@ -67,7 +67,7 @@ const OurMenu = () => {
           <MenuBanner menuImg={salad} menuTitle={"Salad"} />
           <PopularMenu menuCategory={"salad"} />
           <div className="w-full flex justify-center mt-6">
-            <Link to={`/ourShop?menu=0`}>
+            <Link to={`/ourShop/${0}`}>
               <button className="btn btn-outline border-0 border-b-4 mx-auto">
                 Order Your favorite food
               </button>

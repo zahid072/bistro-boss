@@ -13,6 +13,9 @@ const Navbar = () => {
       <li>
         <NavLink to={"/ourShop"}>Our Shop</NavLink>
       </li>
+      <li>
+        <NavLink to={"/dashboard"}>Dashboard</NavLink>
+      </li>
     </>
   );
   return (

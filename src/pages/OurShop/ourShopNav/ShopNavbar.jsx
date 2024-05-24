@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import MenuSection from "../menuSection/MenuSection";
 
-const ShopNavbar = ({menuIndex}) => {
+const ShopNavbar = ({ menuIndex }) => {
+  const menuId = menuIndex ? parseInt(menuIndex) : 0;
+  const [tabIndex, setTabIndex] = useState(menuId);
   const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
   return (
     <div>
-      <Tabs selectedIndex={menuIndex}>
+      <Tabs
+        selectedIndex={tabIndex}
+        onSelect={(index) => {
+          setTabIndex(index);
+        }}
+      >
         <TabList>
           <Tab>Salad</Tab>
           <Tab>Pizza</Tab>
@@ -18,7 +25,7 @@ const ShopNavbar = ({menuIndex}) => {
 
         {categories.map((category, index) => (
           <TabPanel key={index}>
-            <MenuSection menuCategory={category}/>
+            <MenuSection menuCategory={category} />
           </TabPanel>
         ))}
       </Tabs>

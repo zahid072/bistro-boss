@@ -1,12 +1,11 @@
 import React from 'react'
 import shopImg from "../../assets/shop/banner2.jpg"
 import ShopNavbar from './ourShopNav/ShopNavbar'
-import { useLocation} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 
 const OurShop = () => {
-  const {search} = useLocation()
-  const query = new URLSearchParams(search);
-  const menuIndex = parseInt(query.get('menu'));
+  const {id}= useParams()
+  console.log(id)
   
   return (
     <div>
@@ -19,7 +18,7 @@ const OurShop = () => {
         <h1 className="text-4xl font-bold text-center text-white">Our Shop</h1>
       </div>
       <div className='mt-6 max-w-6xl mx-auto'>
-        <ShopNavbar menuIndex={menuIndex}/>
+        <ShopNavbar menuIndex={id}/>
       </div>
     </div>
   )
