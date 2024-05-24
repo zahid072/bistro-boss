@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import { BsFillCalendarDateFill } from "react-icons/bs";
-import { FaCalendarAlt, FaHome } from "react-icons/fa";
+import {
+  FaCalendarAlt,
+  FaHome,
+  FaRegCalendarCheck,
+  FaShoppingCart,
+} from "react-icons/fa";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { ImSpoonKnife } from "react-icons/im";
+import { HiOutlineUserGroup } from "react-icons/hi";
+import { RiAlignItemLeftFill } from "react-icons/ri";
 
 const Sidebar = () => {
-  const [admin, setAdmin] = useState(false);
+  const { admin } = useAuth();
   return (
     <div>
       <div>
@@ -17,52 +27,145 @@ const Sidebar = () => {
         {!admin && (
           <ul className="flex flex-col gap-3 font-semibold uppercase text-xl">
             <li>
-              <Link to={"/dashboard"} className="flex items-center gap-1">
+              <NavLink
+                to={"/dashboard/userHome"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
                 <FaHome /> User Home
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link className="flex items-center gap-1">
+              <NavLink
+                to={"/dashboard/reservation"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
                 <FaCalendarAlt /> reservation
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link className="flex items-center gap-1">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
                 <FaMoneyCheckDollar /> Payment History
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link className="flex items-center gap-1">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
                 <MdOutlineShoppingCart /> my cart
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link className="flex items-center gap-1">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
                 <BsFillCalendarDateFill /> my booking
-              </Link>
+              </NavLink>
             </li>
           </ul>
         )}
         {/* admin menu */}
         {admin && (
-          <ul className="flex flex-col gap-2 font-semibold">
+          <ul className="flex flex-col gap-2 font-semibold uppercase text-xl">
             <li>
-              <Link to={"/dashboard"} className="flex items-center gap-1">
+              <NavLink
+                to={"/dashboard/adminHome"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
                 <FaHome /> Admin Home
-              </Link>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/adminHome"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
+                <ImSpoonKnife /> Add Item
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/adminHome"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
+                <RiAlignItemLeftFill /> Manage Items
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/adminHome"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
+                <FaRegCalendarCheck /> Manage Bookings
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/adminHome"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
+                <HiOutlineUserGroup /> All User
+              </NavLink>
             </li>
           </ul>
         )}
         <div className="divider divide-x-2"></div>
         <ul className="text-xl font-semibold flex flex-col gap-3 mt-4">
           <li>
-            <Link to={"/"}>Home</Link>
+            <Link className="flex gap-1 items-center" to={"/"}>
+              <FaHome></FaHome>Home
+            </Link>
           </li>
           <li className="">
-            <Link to={"/ourMenu"}>Menu</Link>
+            <Link className="flex gap-1 items-center" to={"/ourMenu"}>
+              <GiHamburgerMenu /> Menu
+            </Link>
           </li>
           <li className="">
-            <Link to={"/ourShop"}>Shop</Link>
+            <Link className="flex gap-1 items-center" to={"/ourShop"}>
+              <FaShoppingCart></FaShoppingCart>Shop
+            </Link>
           </li>
         </ul>
       </div>

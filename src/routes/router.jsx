@@ -7,6 +7,7 @@ import MenuDetails from "../pages/menuDetails/MenuDetails";
 import DashboardHome from "../dashboard/dashboardHome/DashboardHome";
 import UserHome from "../dashboard/dashboardPages/userHome/UserHome";
 import AdminHome from "../dashboard/dashboardPages/adminHome/AdminHome";
+import Reservation from "../dashboard/dashboardPages/reservation/Reservation";
 
 const router = createBrowserRouter([
   {
@@ -41,12 +42,16 @@ const router = createBrowserRouter([
     children:[
       // user routes
       {
-        path:"",
+        path:"/dashboard/userHome",
         element:<UserHome/>
+      },
+      {
+        path:"/dashboard/reservation",
+        element:<Reservation/>
       },
       // admin routes
       {
-        path:"",
+        path:"/dashboard/adminHome",
         element:<AdminHome/>
       },
     ]
