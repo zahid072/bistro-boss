@@ -3,9 +3,11 @@ import { FaTrashAlt } from "react-icons/fa";
 import useMyCartData from "../../../hooks/useMyCartData";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const MyCart = () => {
-  const [data, refetch] = useMyCartData();
+  const data= useMyCartData();
+  const {setRefetch}=useAuth()
   const axiosSecure = useAxiosSecure()
   const handleDelete = (id) => {
      axiosSecure.delete(`/myCart/${id}`)
@@ -18,7 +20,7 @@ const MyCart = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-         refetch()
+        setRefetch(true)
       }
      })
   };
@@ -50,7 +52,7 @@ const MyCart = () => {
                 {data.map((menu, index) => (
                   <tr className="hover">
                     <th>
-                      <label>1</label>
+                      <label>{menu?.quantity}</label>
                     </th>
                     <td>
                       <div className="flex items-center gap-3">

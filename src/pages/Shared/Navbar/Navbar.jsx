@@ -3,7 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 import useMyCartData from "../../../hooks/useMyCartData";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
   const data = useMyCartData();
 
   const email = user?.email;

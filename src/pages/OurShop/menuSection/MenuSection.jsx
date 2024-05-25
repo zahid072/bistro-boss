@@ -34,17 +34,37 @@ const MenuSection = ({ menuCategory }) => {
   }, [menuData]);
 
   const handleAddCart = (menu) => {
-    // const cartMenu = {
-    //   name: menu?.name,
-    //   image: menu?.image,
-    //   menuId: menu?._id,
-    //   quantity: 1,
-    //   email: user?.email,
-    // };
-
-    if (cartIds.includes(menu?._id)) {
-      axiosSecure.patch(`/myCart/${menu?._id}`).then((res) => {
-        if (res.data.updatedCount) {
+    const cartMenu = {
+      name: menu?.name,
+      image: menu?.image,
+      menuId: menu?._id,
+      quantity: 1,
+      email: user?.email,
+    };
+    const findCartMenu = data.find(
+      (userMenu) => userMenu?.menuId === menu?._id
+    );
+    if (cartIds.includes(menu?._id) && user) {
+      axiosSecure
+        .patch(`/myCart/${menu?._id}`, { quantity: findCartMenu?.quantity + 1 })
+        .then((res) => {
+          if (res.data.modifiedCount) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${menu?.name} Successfully Add To Cart`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            setRefetch(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    } else if (!cartIds.includes(menu?._id) && user) {
+      axiosSecure.post("/myCart", cartMenu).then((res) => {
+        if (res.data.insertedId) {
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -55,23 +75,9 @@ const MenuSection = ({ menuCategory }) => {
           setRefetch(true);
         }
       });
+    } else {
+      navigate("/signIn");
     }
-    // if (user) {
-    //   axiosSecure.post("/myCart", cartMenu).then((res) => {
-    //     if (res.data.insertedId) {
-    //       Swal.fire({
-    //         position: "top-end",
-    //         icon: "success",
-    //         title: `${menu?.name} Successfully Add To Cart`,
-    //         showConfirmButton: false,
-    //         timer: 1500,
-    //       });
-    //       setRefetch(true);
-    //     }
-    //   });
-    // } else {
-    //   navigate("/signIn");
-    // }
   };
   return (
     <div>

@@ -17,7 +17,7 @@ import { RiAlignItemLeftFill } from "react-icons/ri";
 import useMyCartData from "../../hooks/useMyCartData";
 
 const Sidebar = () => {
-  const [data] = useMyCartData();
+  const data = useMyCartData();
   const { admin } = useAuth();
   return (
     <div>
