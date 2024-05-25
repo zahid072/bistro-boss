@@ -1,7 +1,17 @@
-import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
+import useMyCartData from "../../../hooks/useMyCartData";
 
 const Navbar = () => {
+  const { user } = useAuth();
+  const data = useMyCartData();
+
+  const email = user?.email;
+  console.log(email);
+  const handleLogout = () => {
+    logOut();
+  };
+
   const navLink = (
     <>
       <li>
@@ -13,8 +23,11 @@ const Navbar = () => {
       <li>
         <NavLink to={"/ourShop"}>Our Shop</NavLink>
       </li>
-      <li>
+      <li className="relative">
         <NavLink to={"/dashboard"}>Dashboard</NavLink>
+        <p className="absolute -top-2 left-1 text-white bg-red-500 rounded-full p-1 ">
+          {data?.length}
+        </p>
       </li>
     </>
   );
@@ -39,21 +52,33 @@ const Navbar = () => {
                 />
               </svg>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-            >
+            <ul className="menu menu-sm text-black dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
               {navLink}
             </ul>
           </div>
-          <Link to={"/"} className="btn btn-ghost text-xl">Restaurant</Link>
+          <Link to={"/"} className="btn btn-ghost text-xl">
+            Restaurant
+          </Link>
         </div>
-        
+
         <div className="navbar-end">
-        <div className="navbar-end hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navLink}</ul>
-        </div>
-          <a className="btn">Button</a>
+          <div className="hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">{navLink}</ul>
+          </div>
+          {!user ? (
+            <Link to={"/signIn"}>
+              <button className="btn btn-outline text-white border-white">
+                Sign In
+              </button>
+            </Link>
+          ) : (
+            <button
+              onClick={handleLogout}
+              className="btn btn-outline text-white border-white"
+            >
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </div>

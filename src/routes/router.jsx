@@ -12,6 +12,9 @@ import MyBooking from "../dashboard/user/myBooking/MyBooking";
 import AddItem from "../dashboard/Admin/addItem/AddItem";
 import PaymentHistory from "../dashboard/user/paymentHistory/PaymentHistory";
 import MyCart from "../dashboard/user/myCart/MyCart";
+import SignIn from "../pages/auth/SignIn/SignIn";
+import SignUp from "../pages/auth/SignUp/SignUp";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -36,13 +39,29 @@ const router = createBrowserRouter([
       },
       {
         path: "/menuDetails/:id",
-        element: <MenuDetails />,
+        element: (
+          <PrivateRouter>
+            <MenuDetails />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/signIn",
+        element: <SignIn />,
+      },
+      {
+        path: "/signUp",
+        element: <SignUp />,
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <DashboardHome />,
+    element: (
+      <PrivateRouter>
+        <DashboardHome />
+      </PrivateRouter>
+    ),
     children: [
       // ----------------------------------user routes----------------------------------
       {

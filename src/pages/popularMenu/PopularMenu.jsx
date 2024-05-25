@@ -13,7 +13,6 @@ const PopularMenu = ({ menuCategory, menuTitle }) => {
       setPopularMenu(filteredMenu);
     }
   }, [menuData]);
-  console.log(popularMenu);
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex flex-col justify-center w-full mb-4">

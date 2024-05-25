@@ -14,8 +14,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ImSpoonKnife } from "react-icons/im";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { RiAlignItemLeftFill } from "react-icons/ri";
+import useMyCartData from "../../hooks/useMyCartData";
 
 const Sidebar = () => {
+  const [data] = useMyCartData();
   const { admin } = useAuth();
   return (
     <div>
@@ -52,7 +54,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-              to={"/dashboard/paymentHistory"}
+                to={"/dashboard/paymentHistory"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white flex items-center gap-1"
@@ -64,19 +66,27 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-              to={"/dashboard/myCart"}
+                to={"/dashboard/myCart"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white flex items-center gap-1"
                     : "flex items-center gap-1"
                 }
               >
-                <MdOutlineShoppingCart /> my cart
+                <MdOutlineShoppingCart />{" "}
+                <span className="relative">
+                  my cart{" "}
+                  {data && (
+                    <p className="absolute text-sm -top-3 -right-4 text-white bg-red-500 rounded-full p-1 ">
+                      {data?.length}
+                    </p>
+                  )}
+                </span>
               </NavLink>
             </li>
             <li>
               <NavLink
-              to={"/dashboard/myBooking"}
+                to={"/dashboard/myBooking"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white flex items-center gap-1"
