@@ -30,6 +30,40 @@ const MyCart = () => {
       }
     });
   };
+  // --------------------handle quantity increase or decrease--------------------
+  const handleIncrease = (id) => {
+    const findCartMenu = data?.find((userMenu) => userMenu?.menuId === id);
+    if (findCartMenu.quantity < 5) {
+      axiosSecure
+        .patch(`/myCart/${id}`, { quantity: findCartMenu?.quantity + 1 })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.modifiedCount) {
+            setRefetch(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  };
+  // -----------------------------------
+  const handleDecrease = (id) => {
+    const findCartMenu = data?.find((userMenu) => userMenu?.menuId === id);
+    if (findCartMenu.quantity > 1) {
+      axiosSecure
+        .patch(`/myCart/${id}`, { quantity: findCartMenu?.quantity - 1 })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.modifiedCount) {
+            setRefetch(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  };
   return (
     <div>
       <h1 className="text-center text-xl font-semibold font-gilda">My Cart</h1>
@@ -56,9 +90,25 @@ const MyCart = () => {
               <tbody>
                 {/* row 1 */}
                 {data.map((menu, index) => (
-                  <tr className="hover">
+                  <tr className="hover" key={index}>
                     <th>
-                      <label>{menu?.quantity}</label>
+                      <button
+                        onClick={() => {
+                          handleDecrease(menu?.menuId);
+                        }}
+                        className="border px-2 py-1 text-xl font-bold rounded-sm hover:bg-slate-700 hover:text-white"
+                      >
+                        -
+                      </button>
+                      <label className="mx-2">{menu?.quantity}</label>
+                      <button
+                        onClick={() => {
+                          handleIncrease(menu?.menuId);
+                        }}
+                        className="border px-2 py-1 text-xl font-bold  rounded-sm hover:bg-slate-700 hover:text-white"
+                      >
+                        +
+                      </button>
                     </th>
                     <td>
                       <div className="flex items-center gap-3">
@@ -72,7 +122,7 @@ const MyCart = () => {
                     <td>
                       <h3>{menu?.name}</h3>
                     </td>
-                    <td>$ {menu?.price * menu?.quantity}</td>
+                    <td>$ {(menu?.price * menu?.quantity).toFixed(2)}</td>
                     <th>
                       <button
                         onClick={() => {
