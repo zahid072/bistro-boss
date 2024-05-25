@@ -6,13 +6,19 @@ import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 
 const MyCart = () => {
-  const data= useMyCartData();
-  const {setRefetch}=useAuth()
-  const axiosSecure = useAxiosSecure()
+  const data = useMyCartData();
+  const { setRefetch } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  // -------------total price-------------
+  let totalPrice = 0;
+  for (let menu of data) {
+    totalPrice += menu?.price * menu?.quantity;
+  }
+
+  // ------------------handle delete------------------
   const handleDelete = (id) => {
-     axiosSecure.delete(`/myCart/${id}`)
-     .then(res =>{
-      if(res.data.deletedCount){
+    axiosSecure.delete(`/myCart/${id}`).then((res) => {
+      if (res.data.deletedCount) {
         Swal.fire({
           position: "bottom-end",
           icon: "success",
@@ -20,9 +26,9 @@ const MyCart = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        setRefetch(true)
+        setRefetch(true);
       }
-     })
+    });
   };
   return (
     <div>
@@ -30,8 +36,8 @@ const MyCart = () => {
       <div className="divider divide-x-2"></div>
       <div className="bg-white p-6 rounded-lg lg:w-4/6 mx-auto md:w-4/5 w-full shadow">
         <div className="flex justify-between items-center text-xl uppercase">
-          <h1>Total Order: ( {0} ) </h1>
-          <h2>Total Price: ${0}</h2>
+          <h1>Total Order: ( {data.length} ) </h1>
+          <h2>Total Price: ${totalPrice}</h2>
           <button className="btn btn-outline px-3 py-2">Pay</button>
         </div>
         <div>
@@ -58,10 +64,7 @@ const MyCart = () => {
                       <div className="flex items-center gap-3">
                         <div className="avatar">
                           <div className="mask mask-squircle w-12 h-12">
-                            <img
-                              src={menu?.image}
-                              alt="Item Image"
-                            />
+                            <img src={menu?.image} alt="Item Image" />
                           </div>
                         </div>
                       </div>
@@ -69,11 +72,14 @@ const MyCart = () => {
                     <td>
                       <h3>{menu?.name}</h3>
                     </td>
-                    <td>$ {menu?.price}</td>
+                    <td>$ {menu?.price * menu?.quantity}</td>
                     <th>
-                      <button onClick={()=>{
-                        handleDelete(menu?._id)
-                      }} className="btn btn-ghost btn-xs">
+                      <button
+                        onClick={() => {
+                          handleDelete(menu?._id);
+                        }}
+                        className="btn btn-ghost btn-xs"
+                      >
                         <FaTrashAlt />
                       </button>
                     </th>

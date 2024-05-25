@@ -13,17 +13,12 @@ const MenuSection = ({ menuCategory }) => {
   const navigate = useNavigate();
   const menuData = useMenuData();
   const axiosSecure = useAxiosSecure();
-  const [cartIds, setCartIds] = useState([]);
 
-  useEffect(() => {
     const availableIds = [];
     for (let menu of data) {
       availableIds.push(menu.menuId);
     }
-    if (availableIds) {
-      setCartIds(availableIds);
-    }
-  }, [data.length > 0]);
+   
   useEffect(() => {
     const filteredMenu = menuData.filter(
       (menu) => menu.category === menuCategory
@@ -38,13 +33,14 @@ const MenuSection = ({ menuCategory }) => {
       name: menu?.name,
       image: menu?.image,
       menuId: menu?._id,
+      price: menu?.price,
       quantity: 1,
       email: user?.email,
     };
     const findCartMenu = data.find(
       (userMenu) => userMenu?.menuId === menu?._id
     );
-    if (cartIds.includes(menu?._id) && user) {
+    if (availableIds.includes(menu?._id) && user) {
       axiosSecure
         .patch(`/myCart/${menu?._id}`, { quantity: findCartMenu?.quantity + 1 })
         .then((res) => {
@@ -62,7 +58,7 @@ const MenuSection = ({ menuCategory }) => {
         .catch((err) => {
           console.log(err.message);
         });
-    } else if (!cartIds.includes(menu?._id) && user) {
+    } else if (!availableIds.includes(menu?._id) && user) {
       axiosSecure.post("/myCart", cartMenu).then((res) => {
         if (res.data.insertedId) {
           Swal.fire({
