@@ -5,9 +5,7 @@ import useMyCartData from "../../../hooks/useMyCartData";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const data = useMyCartData();
-
   const email = user?.email;
-  console.log(email);
   const handleLogout = () => {
     logOut();
   };
@@ -25,9 +23,11 @@ const Navbar = () => {
       </li>
       <li className="relative">
         <NavLink to={"/dashboard"}>Dashboard</NavLink>
-        <p className="absolute -top-2 left-1 text-white bg-red-500 rounded-full p-1 ">
-          {data?.length}
-        </p>
+        {data.length > 0 && (
+          <p className="absolute -top-3 left-5 text-white bg-red-500 rounded-full p-1 ">
+            {data?.length}
+          </p>
+        )}
       </li>
     </>
   );

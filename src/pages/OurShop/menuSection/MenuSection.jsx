@@ -18,7 +18,6 @@ const MenuSection = ({ menuCategory }) => {
     for (let menu of data) {
       availableIds.push(menu.menuId);
     }
-   
   useEffect(() => {
     const filteredMenu = menuData.filter(
       (menu) => menu.category === menuCategory

@@ -2,22 +2,29 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
+import { FaGoogle } from "react-icons/fa6";
 
 const SignIn = () => {
-  const navigate = useNavigate()
-  const {signInUsers}= useAuth()
+  const navigate = useNavigate();
+  const { signInUsers, signInWithGoogle } = useAuth();
   const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
 
-    signInUsers(email, password)
-   .then(res =>{
-    toast.success("Log In successful.")
-    form.reset()
-    navigate("/")
-   })
+    signInUsers(email, password).then((res) => {
+      toast.success("Log In successful.");
+      form.reset();
+      navigate("/");
+    });
+  };
+  const handleGoogleSignIn = () => {
+      signInWithGoogle()
+      .then(res =>{
+        toast.success("Lon In successful.")
+        navigate("/")
+      })
   };
   return (
     <div
@@ -27,7 +34,7 @@ const SignIn = () => {
       className="bg-cover bg-center bg-no-repeat w-full h-screen"
     >
       <div className="size-full flex justify-center items-center">
-        <div className="max-w-md bg-[#472b5b58] p-6 rounded-lg space-y-4 text-white backdrop-blur-lg">
+        <div className="max-w-md bg-[#b9b8b958] p-6 rounded-lg space-y-4 text-white backdrop-blur-lg">
           <h1 className="text-3xl font-bold font-gilda text-center">Sign In</h1>
           <form onSubmit={handleSignIn} className="space-y-4">
             <div>
@@ -49,11 +56,19 @@ const SignIn = () => {
               />
             </div>
             <div className="flex justify-center">
-              <button className="btn btn-outline border-0 border-b-2 text-white border-white">
+              <button className="btn btn-outline border-0 border-y-2 text-white border-white w-full">
                 Sign In
               </button>
             </div>
           </form>
+          <div>
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn btn-outline border-0 border-y-2 w-full text-white font-semibold"
+            >
+              <FaGoogle /> Google
+            </button>
+          </div>
           <p>
             Don't have an account ?{" "}
             <Link className="font-semibold underline" to={"/signUp"}>

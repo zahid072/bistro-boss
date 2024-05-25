@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import {
   FaCalendarAlt,
@@ -8,7 +7,7 @@ import {
 } from "react-icons/fa";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImSpoonKnife } from "react-icons/im";
@@ -17,6 +16,7 @@ import { RiAlignItemLeftFill } from "react-icons/ri";
 import useMyCartData from "../../hooks/useMyCartData";
 
 const Sidebar = () => {
+  const {pathname} = useLocation();
   const data = useMyCartData();
   const { admin } = useAuth();
   return (
@@ -30,9 +30,9 @@ const Sidebar = () => {
           <ul className="flex flex-col gap-3 font-semibold uppercase text-xl">
             <li>
               <NavLink
-                to={"/dashboard/userHome"}
-                className={({ isActive }) =>
-                  isActive
+                to={"/dashboard"}
+                className={
+                  pathname === "/dashboard"
                     ? "text-white flex items-center gap-1"
                     : "flex items-center gap-1"
                 }
@@ -76,7 +76,7 @@ const Sidebar = () => {
                 <MdOutlineShoppingCart />{" "}
                 <span className="relative">
                   my cart{" "}
-                  {data && (
+                  {data.length > 0 && (
                     <p className="absolute text-sm -top-3 -right-4 text-white bg-red-500 rounded-full p-1 ">
                       {data?.length}
                     </p>
@@ -103,9 +103,8 @@ const Sidebar = () => {
           <ul className="flex flex-col gap-2 font-semibold uppercase text-xl">
             <li>
               <NavLink
-                to={"/dashboard/adminHome"}
-                className={({ isActive }) =>
-                  isActive
+                to={
+                  pathname === "/dashboard"
                     ? "text-white flex items-center gap-1"
                     : "flex items-center gap-1"
                 }

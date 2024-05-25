@@ -56,7 +56,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard",
+    path: "dashboard",
     element: (
       <PrivateRouter>
         <DashboardHome />
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
     children: [
       // ----------------------------------user routes----------------------------------
       {
-        path: "/dashboard/userHome",
+        path: "dashboard",
         element: <UserHome />,
       },
       {
@@ -86,7 +86,7 @@ const router = createBrowserRouter([
       },
       // -------------------------------admin routes-------------------------------
       {
-        path: "/dashboard/adminHome",
+        path: "/dashboard",
         element: <AdminHome />,
       },
       {
