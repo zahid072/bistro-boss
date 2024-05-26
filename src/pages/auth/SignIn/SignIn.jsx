@@ -17,9 +17,16 @@ const SignIn = () => {
     const password = form.password.value;
 
     signInUsers(email, password).then((res) => {
+      const newUser = {
+        name: res.user?.displayName,
+        email: res.user?.email,
+        image: res.user?.photoURL,
+        role: "user",
+      };
       toast.success("Log In successful.");
       form.reset();
       navigate("/");
+      axiosSecure.post("/allUsers", newUser).then((res) => {});
     });
   };
   const handleGoogleSignIn = () => {
@@ -49,7 +56,7 @@ const SignIn = () => {
             <div>
               <label className="font-semibold">Email</label>
               <input
-                className="input input-bordered w-full mt-2"
+                className="input input-bordered w-full mt-2 text-black"
                 type="email"
                 name="email"
                 placeholder="Your Email"

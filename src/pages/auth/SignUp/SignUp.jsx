@@ -108,8 +108,8 @@ const SignUp = () => {
           </form>
           <p>
             Don't have an account ?{" "}
-            <Link className="font-semibold underline" to={"/signUp"}>
-              Sign Up
+            <Link className="font-semibold underline" to={"/signIn"}>
+              Sign In
             </Link>
           </p>
         </div>
