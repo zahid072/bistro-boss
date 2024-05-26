@@ -16,7 +16,7 @@ import { RiAlignItemLeftFill } from "react-icons/ri";
 import useMyCartData from "../../hooks/useMyCartData";
 
 const Sidebar = () => {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const data = useMyCartData();
   const { admin } = useAuth();
   return (
@@ -25,8 +25,70 @@ const Sidebar = () => {
         <div className="py-10 text-center">
           <h1 className="text-2xl font-semibold">Bistro Boss Restaurant</h1>
         </div>
-        {/* user menu */}
-        {!admin && (
+
+        {/* admin menu */}
+        {admin ? (
+          <ul className="flex flex-col gap-2 font-semibold uppercase text-xl">
+            <li>
+              <NavLink
+                to={"/dashboard"}
+                className={ pathname === "/dashboard"
+                ? "text-white flex items-center gap-1"
+                : "flex items-center gap-1"}
+              >
+                <FaHome /> Admin Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/addItem"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
+                <ImSpoonKnife /> Add Item
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/manageItem"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
+                <RiAlignItemLeftFill /> Manage Items
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/manageBooking"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
+                <FaRegCalendarCheck /> Manage Bookings
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/allUser"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white flex items-center gap-1"
+                    : "flex items-center gap-1"
+                }
+              >
+                <HiOutlineUserGroup /> All User
+              </NavLink>
+            </li>
+          </ul>
+        ) : (
           <ul className="flex flex-col gap-3 font-semibold uppercase text-xl">
             <li>
               <NavLink
@@ -94,70 +156,6 @@ const Sidebar = () => {
                 }
               >
                 <BsFillCalendarDateFill /> my booking
-              </NavLink>
-            </li>
-          </ul>
-        )}
-        {/* admin menu */}
-        {admin && (
-          <ul className="flex flex-col gap-2 font-semibold uppercase text-xl">
-            <li>
-              <NavLink
-                to={
-                  pathname === "/dashboard"
-                    ? "text-white flex items-center gap-1"
-                    : "flex items-center gap-1"
-                }
-              >
-                <FaHome /> Admin Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={"/dashboard/addItem"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-white flex items-center gap-1"
-                    : "flex items-center gap-1"
-                }
-              >
-                <ImSpoonKnife /> Add Item
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={"/dashboard/manageItem"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-white flex items-center gap-1"
-                    : "flex items-center gap-1"
-                }
-              >
-                <RiAlignItemLeftFill /> Manage Items
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={"/dashboard/manageBooking"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-white flex items-center gap-1"
-                    : "flex items-center gap-1"
-                }
-              >
-                <FaRegCalendarCheck /> Manage Bookings
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={"/dashboard/allUser"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-white flex items-center gap-1"
-                    : "flex items-center gap-1"
-                }
-              >
-                <HiOutlineUserGroup /> All User
               </NavLink>
             </li>
           </ul>

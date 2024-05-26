@@ -3,10 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { FaGoogle } from "react-icons/fa6";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const { signInUsers, signInWithGoogle } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
   const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -20,11 +23,17 @@ const SignIn = () => {
     });
   };
   const handleGoogleSignIn = () => {
-      signInWithGoogle()
-      .then(res =>{
-        toast.success("Lon In successful.")
-        navigate("/")
-      })
+    signInWithGoogle().then((res) => {
+      const newUser = {
+        name: res.user?.displayName,
+        email: res.user?.email,
+        image: res.user?.photoURL,
+        role: "user",
+      };
+      toast.success("Lon In successful.");
+      navigate("/");
+      axiosSecure.post("/allUsers", newUser).then((res) => {});
+    });
   };
   return (
     <div

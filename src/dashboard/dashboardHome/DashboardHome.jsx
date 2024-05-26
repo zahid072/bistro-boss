@@ -1,9 +1,19 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../../pages/Shared/Footer/Footer";
 import Sidebar from "../sidebar/Sidebar";
+import { useEffect } from "react";
+import userUsersData from "../../hooks/userUsersData";
+import useAuth from "../../hooks/useAuth";
 
 const DashboardHome = () => {
-  
+  const { user, setAdmin } = useAuth();
+  const [data] = userUsersData();
+
+  useEffect(() => {
+    const findUser = data.find((matchUser) => matchUser.email === user.email);
+    findUser?.role === "admin" ? setAdmin(true) : setAdmin(false);
+  }, [data]);
+
   return (
     <div>
       <div className="flex">
