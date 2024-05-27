@@ -23,7 +23,7 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    const newUser = { name, email, image: photo, role: "user" };
+    const newUser = { name, email, image: photo, role: "user", main_admin: false };
     setErr("");
 
     if (usersEmail.includes(email)) {

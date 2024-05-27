@@ -17,6 +17,7 @@ import SignUp from "../pages/auth/SignUp/SignUp";
 import PrivateRouter from "./PrivateRouter";
 import AllUsers from "../dashboard/Admin/allUsers/AllUsers";
 import AdminRouter from "./AdminRouter";
+import Payment from "../dashboard/user/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/reservation",
         element: <Reservation />,
+      },
+      {
+        path: "/dashboard/payment",
+        element: <Payment />,
       },
       // -------------------------------admin routes-------------------------------
       {

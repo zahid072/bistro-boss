@@ -4,14 +4,15 @@ import useMyCartData from "../../../hooks/useMyCartData";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
-  const data = useMyCartData();
+  const cartData = useMyCartData();
   const { setRefetch } = useAuth();
   const axiosSecure = useAxiosSecure();
   // -------------total price-------------
   let totalPrice = 0;
-  for (let menu of data) {
+  for (let menu of cartData) {
     totalPrice += menu?.price * menu?.quantity;
   }
 
@@ -32,7 +33,7 @@ const MyCart = () => {
   };
   // --------------------handle quantity increase or decrease--------------------
   const handleIncrease = (id) => {
-    const findCartMenu = data?.find((userMenu) => userMenu?.menuId === id);
+    const findCartMenu = cartData?.find((userMenu) => userMenu?.menuId === id);
     if (findCartMenu.quantity < 5) {
       axiosSecure
         .patch(`/myCart/${id}`, { quantity: findCartMenu?.quantity + 1 })
@@ -49,7 +50,7 @@ const MyCart = () => {
   };
   // -----------------------------------
   const handleDecrease = (id) => {
-    const findCartMenu = data?.find((userMenu) => userMenu?.menuId === id);
+    const findCartMenu = cartData?.find((userMenu) => userMenu?.menuId === id);
     if (findCartMenu.quantity > 1) {
       axiosSecure
         .patch(`/myCart/${id}`, { quantity: findCartMenu?.quantity - 1 })
@@ -70,9 +71,15 @@ const MyCart = () => {
       <div className="divider divide-x-2"></div>
       <div className="bg-white p-6 rounded-lg lg:w-4/6 mx-auto md:w-4/5 w-full shadow">
         <div className="flex justify-between items-center text-xl uppercase">
-          <h1>Total Order: ( {data.length} ) </h1>
-          <h2>Total Price: ${totalPrice}</h2>
-          <button className="btn btn-outline px-3 py-2">Pay</button>
+          <h1>Total Order: ( {cartData.length} ) </h1>
+          <h2>Total Price: ${totalPrice.toFixed(2)}</h2>
+          {cartData.length > 0 ? (
+            <Link to={"/dashboard/payment"}>
+              <button className="btn btn-outline px-3 py-2">Pay</button>
+            </Link>
+          ) : (
+            <button disabled className="btn btn-outline px-3 py-2">Pay</button>
+          )}
         </div>
         <div>
           <div className="overflow-x-auto">
@@ -89,7 +96,7 @@ const MyCart = () => {
               </thead>
               <tbody>
                 {/* row 1 */}
-                {data.map((menu, index) => (
+                {cartData.map((menu, index) => (
                   <tr className="hover" key={index}>
                     <th>
                       <button

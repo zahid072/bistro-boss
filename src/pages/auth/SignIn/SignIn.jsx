@@ -22,6 +22,7 @@ const SignIn = () => {
         email: res.user?.email,
         image: res.user?.photoURL,
         role: "user",
+        main_admin: false,
       };
       toast.success("Log In successful.");
       form.reset();
@@ -36,6 +37,7 @@ const SignIn = () => {
         email: res.user?.email,
         image: res.user?.photoURL,
         role: "user",
+        main_admin: false,
       };
       toast.success("Lon In successful.");
       navigate("/");

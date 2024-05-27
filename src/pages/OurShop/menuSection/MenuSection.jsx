@@ -5,19 +5,29 @@ import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useMyCartData from "../../../hooks/useMyCartData";
+import userUsersData from "../../../hooks/userUsersData";
 
 const MenuSection = ({ menuCategory }) => {
   const [categoryMenu, setCategoryMenu] = useState([]);
-  const data = useMyCartData();
+  const cartData = useMyCartData();
   const { user, setRefetch } = useAuth();
   const navigate = useNavigate();
   const menuData = useMenuData();
+  const [checkAdmin, setCheckAdmin] = useState({});
+  const [data] = userUsersData();
   const axiosSecure = useAxiosSecure();
 
-    const availableIds = [];
-    for (let menu of data) {
-      availableIds.push(menu.menuId);
+  useEffect(() => {
+    const findAdmin = data.find((users) => users?.email === user?.email);
+    if (findAdmin) {
+      setCheckAdmin(findAdmin);
     }
+  }, [data]);
+
+  const availableIds = [];
+  for (let menu of data) {
+    availableIds.push(menu.menuId);
+  }
   useEffect(() => {
     const filteredMenu = menuData.filter(
       (menu) => menu.category === menuCategory
@@ -36,7 +46,16 @@ const MenuSection = ({ menuCategory }) => {
       quantity: 1,
       email: user?.email,
     };
-    const findCartMenu = data.find(
+    if (checkAdmin?.role === "admin") {
+      return Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `${menu?.name} Successfully Add To Cart`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    const findCartMenu = cartData.find(
       (userMenu) => userMenu?.menuId === menu?._id
     );
     if (availableIds.includes(menu?._id) && user) {
